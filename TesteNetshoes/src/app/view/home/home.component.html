@@ -1,0 +1,69 @@
+<div class="wrapper" >
+  <div class="canvas" >
+    <div class="menu">
+      <div class="bag">
+        <div class="icon_title">
+                <span class="icon_bag">
+                    <img src="../../../assets/image/icon_bag.png" alt="Sacola" />
+                    <span class="qty">{{lisProductBag.length}}</span>
+                </span>
+          <span class="txt">Sacola</span>
+        </div>
+        <div class="cart_items">
+          <div class="item_bag" *ngFor="let item of lisProductBag; let i = index">
+            <div class="i">
+              <img src="https://via.placeholder.com/80" />
+            </div>
+            <div class="item-description">
+              <div class="title">{{item.title}}</div>
+              <span class="size">{{item.availableSizes}} | </span>
+              <span class="color">{{item.style}}</span>
+              <div class="qty">Quantidade:
+                <span class="value">1</span>
+              </div>
+            </div>
+            <div class="x">
+              <span (click)="removeItem(i)" (mouseout)="changeStyle($event, i)" (mouseover)="changeStyle($event, i)" class="btn"></span>
+              <span class="value">{{item.currencyFormat}} <b>{{item.price}}</b></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="subtotal">
+          <div class="txt">Subtotal</div>
+          <div class="price">
+            <div class="value">{{model.currencyFormat}}<b>{{total()}}</b></div>
+            <div class="parceling">ou em até 10 X R$ {{getTotalInstallments(total())}}</div>
+          </div>
+        </div>
+        <div class="btn_buy">
+          <button>comprar</button>
+        </div>
+      </div>
+    </div>
+    <div class="item-list">
+      <!--      onClick={this.menuOpen}-->
+      <div class="item" (click)="addItem(item)" *ngFor="let item of listItem">
+        <a class="i card-link">
+          <img src="https://via.placeholder.com/180x230" />
+        </a>
+        <div class="title">
+          <a class="n card-link">
+            <span>{{item.title}}</span>
+          </a>
+        </div>
+        <div class="price">
+          <a class="card-link">
+                        <span class="full-mounted-price">
+                            <span>
+                                <small>{{item.currencyFormat}} </small>{{splitPrice(item.price)}}<small>, {{splitDecimals(item.price)}}</small>
+                            </span>
+                        </span>
+          </a>
+        </div>
+        <a class="in parceling" *ngIf="item.installments > 0">ou {{item.installments}} x de {{item.currencyFormat}} {{getInstallments(item.price, item.installments)}}</a>
+      </div>
+
+    </div>
+  </div>
+</div>
